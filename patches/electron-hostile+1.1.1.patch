@@ -1,0 +1,58 @@
+diff --git a/node_modules/electron-hostile/lib/index.js b/node_modules/electron-hostile/lib/index.js
+index d3218de..8608e80 100644
+--- a/node_modules/electron-hostile/lib/index.js
++++ b/node_modules/electron-hostile/lib/index.js
+@@ -59,6 +59,19 @@ const addHostsEntries = async (entries, sudoOptions = {}, returnCommand = false)
+   return writeFile(lines, sudoOptions, returnCommand);
+ }
+ 
++const addHostsEntriesDirect = async (entries, sudoOptions = {}, returnCommand = false) => {
++  let lines = await getEntries(true);
++  let wrapper = entries[0].wrapper;
++  lines.push([`#### START ${wrapper} entries`]);
++
++  entries.forEach(({ ip, host, wrapper }) => {
++    lines.push([ip, host]);
++  });
++
++  lines.push([`#### END ${wrapper} entries`]);
++  return writeFile(lines, sudoOptions, returnCommand);
++}
++
+ const removeHostsEntry = async (host, ip, sudoOptions = {}, returnCommand = false) => {
+   const lines = (await getEntries(true)).filter(line => {
+     return !(Array.isArray(line) && (!ip || line[0] === ip) && line[1] === host);
+@@ -75,6 +88,25 @@ const removeHostsEntries = async (entries, sudoOptions = {}, returnCommand = fal
+   return writeFile(lines, sudoOptions, returnCommand)
+ }
+ 
++const removeHostsEntriesAll = async(wrapper, sudoOptions = {}, returnCommand = false) => {
++  let lines = await getEntries(true);
++  let newLines = [];
++  let skip = false;
++  for(let i=0;i<lines.length;i++){
++    let line = lines[i];
++    if(line[0].startsWith(`#### START ${wrapper}`)){
++      skip = true;
++    }
++    if(!skip){
++      newLines.push(line);
++    }
++    if(line[0].startsWith(`#### END ${wrapper}`)){
++      skip = false;
++    }
++  }
++  return writeFile(newLines, sudoOptions, returnCommand)
++}
++
+ const writeFile = async (lines, sudoOptions = {}, returnCommand = false) => {
+   lines = lines.map(function(line, lineNum) {
+     if (Array.isArray(line) && line[0] && line[1]) {
+@@ -114,5 +146,7 @@ module.exports = {
+   addHostsEntries,
+   removeHostsEntry,
+   removeHostsEntries,
++  addHostsEntriesDirect,
++  removeHostsEntriesAll
+ };
+ 

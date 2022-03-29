@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Helping Hand</title>
+  <style>
+    @font-face {
+      font-family: 'Righteous';
+      font-style: normal;
+      font-weight: 400;
+      src: local('assets/Righteous.ttf'), local('assets/Righteous-Regular.ttf'), url(http://themes.googleusercontent.com/static/fonts/righteous/v2/w5P-SI7QJQSDqB3GziL8XaCWcynf_cDxXwCLxiixG1c.ttf) format('truetype');
+    }
+
+    html,
+    body,
+    select {
+
+      font-family: 'Righteous' !important;
+      margin: 0px !important;
+      padding: 0px !important;
+      background: rgba(0, 0, 0, 0);
+    }
+
+    button {
+      font-family: 'Righteous' !important;
+    }
+
+    .selectBx {
+      margin-left: 185px !important;
+      width: 270px;
+      height: 50px;
+      padding-left: 25px !important;
+      border-radius: 30px;
+      opacity: .9;
+      margin-top: -30px !important;
+      color: white !important;
+      border-color: white;
+      font-size: 25px;
+      background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat 95% 50%;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+
+    .selectBx:hover {
+      cursor: pointer !important;
+    }
+
+.link{
+  color:blue;
+  text-decoration:underline;
+  cursor:pointer;
+}
+
+    button,
+    input {
+      font-family: 'Righteous' !important;
+    }
+
+
+    .selectBx {
+      margin-left: 185px !important;
+      width: 270px;
+      height: 50px;
+      padding-left: 25px !important;
+      border-radius: 30px;
+      opacity: .9;
+      margin-top: -30px !important;
+      color: white !important;
+      border-color: white;
+      font-size: 25px;
+      background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat 95% 50%;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    }
+
+    select:hover {
+      cursor: pointer !important;
+    }
+
+    .selectBx:hover {
+      cursor: pointer !important;
+    }
+
+    input:hover {
+      cursor: pointer !important;
+    }
+
+    body {
+      -webkit-touch-callout: none;
+      /* iOS Safari */
+      -webkit-user-select: none;
+      /* Safari */
+      -khtml-user-select: none;
+      /* Konqueror HTML */
+      -moz-user-select: none;
+      /* Old versions of Firefox */
+      -ms-user-select: none;
+      /* Internet Explorer/Edge */
+      user-select: none;
+      /* Non-prefixed version, currently*/
+
+    }
+
+    input#block-input {
+      width: 100%;
+      border: 0;
+      border-bottom: 1px solid #333;
+      height: 30px;
+      font-size: 20px;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      background: #CA0B00 !important;
+      color: white;
+      border-radius: 5px;
+
+    }
+
+    .donate:hover {
+      cursor: pointer !important;
+      transform: scale(1.02)
+    }
+
+    .btn:hover {
+      cursor: pointer !important;
+      transform: scale(1.02)
+    }
+
+    .btn2 {
+      background: #CA0B00 !important;
+      color: white;
+      border-radius: 5px;
+
+    }
+
+
+    .btn2:hover {
+      cursor: pointer !important;
+      transform: scale(1.02)
+    }
+
+
+
+    .cmm:hover {
+      cursor: pointer !important;
+      transform: scale(1.02)
+    }
+
+    button {
+      font-size: 18px;
+      background-color: white;
+      border: solid 1px #ddd;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+      outline: none;
+    }
+
+    #submit-area {
+      margin-top: 20px;
+    }
+
+    #submit-area div {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 5vh;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+
+    #submit-area button {
+
+      width: 200px;
+      height: 75px;
+      cursor: pointer;
+    }
+
+    #submit-area2 button {
+
+      width: 200px;
+      height: 75px;
+      cursor: pointer;
+    }
+
+    #submit-area2 {
+      margin-top: 20px;
+    }
+
+
+    #swal2-html-container{
+max-height:300px;
+    }
+
+    #submit-area2 div {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 12vh;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #submit-area2 button {
+
+      width: 200px;
+      height: 75px;
+      cursor: pointer;
+    }
+
+    /* background */
+
+
+    .hero {
+      -webkit-animation: theme 71s linear infinite;
+      animation: theme 71s linear infinite;
+    }
+
+    .autocomplete{
+      color:white;
+      cursor:pointer;
+    }
+
+    .hero:after,
+    .hero:before {
+      content: '';
+      display: block;
+      position: fixed;
+      z-index: -1;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      width: 100vmax;
+      height: 100vmax;
+      background: rgba(0, 0, 0, 0.08);
+      -webkit-animation: background 90s linear infinite;
+      animation: background 90s linear infinite;
+    }
+
+    .hero:after {
+      left: 15vw;
+    }
+
+    .hero:before {
+      right: 15vw;
+      -webkit-animation-delay: -30s;
+      animation-delay: -30s;
+      -webkit-animation-direction: reverse;
+      animation-direction: reverse;
+    }
+
+    @-webkit-keyframes theme {
+      0% {
+        background: #74C390;
+      }
+
+      16% {
+        background: #5DBDB6;
+      }
+
+      33% {
+        background: #59D4E1;
+      }
+
+      50% {
+        background: #51BCE8;
+      }
+
+      66% {
+        background: #FA5374;
+      }
+
+      83% {
+        background: #E46653;
+      }
+
+      100% {
+        background: #74C390;
+      }
+    }
+
+    @keyframes theme {
+      0% {
+        background: #74C390;
+      }
+
+      16% {
+        background: #5DBDB6;
+      }
+
+      33% {
+        background: #59D4E1;
+      }
+
+      50% {
+        background: #51BCE8;
+      }
+
+      66% {
+        background: #FA5374;
+      }
+
+      83% {
+        background: #E46653;
+      }
+
+      100% {
+        background: #74C390;
+      }
+    }
+
+    @-webkit-keyframes background {
+      0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes background {
+      0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
+  <script>
+  </script>
+  <script>
+    function blocksite() {
+      var website = document.getElementById("block-input").value;
+      electron.blockWebsite(website);
+    }
+
+
+  </script>
+
+  <script src="assets/sweetalert2.all.min.js"></script>
+  <script src="assets/autocomplete.js"></script>
+  <link rel="stylesheet" type="text/css"
+    onclick="openExternal('https://kraaden.github.io/autocomplete/autocomplete.css">
+  <script src="../topsites.js"></script>
+
+
+</head>
+
+<script>
+  let currentSelection = null;
+  function selectChng(sel) {
+    currentSelection = sel;
+
+    document.getElementById("submit-area").style.display = "block";
+    var options = ['pornography', 'gambling', 'gaming', 'social', 'custom', 'privacy', 'messaging', 'dating', 'splash', 'undo']
+    options.splice(options.indexOf(sel), 1);
+    options.forEach((nm) => {
+      document.getElementById(nm).style.display = "none";
+    })
+    document.getElementById(sel).style.display = "block";
+    if (sel == 'undo') {
+      document.getElementById("submit-area").style.display = "none";
+
+if (window.tags){
+   document.getElementById("revert").style.display = "block";
+   document.getElementById("noTags").style.display = "none";
+}else{
+document.getElementById("revert").style.display = "none";
+document.getElementById("noTags").style.display = "block";
+}
+
+
+
+
+
+
+
+    }
+    resetBtn()
+  }
+
+
+
+  function unAuth() {
+    document.getElementById("btn").style.opacity = .3;
+    document.getElementById("btn").style.pointerEvents = "none";
+  }
+
+  function resetBtn() {
+    document.getElementById("discbox").checked = false;
+    //document.getElementById("discbox").click()
+    unAuth();
+
+  }
+
+  function auth() {
+    document.getElementById("btn").style.opacity = 1;
+    document.getElementById("btn").style.pointerEvents = "auto";
+  }
+
+  function disclaimChkbx(state) {
+    if (state.checked) {
+      auth();
+    } else {
+      unAuth();
+    }
+  }
+
+
+  function openExternal(url) {
+    window.open(url, "_blank", "frame=true,nodeIntegration=no")
+  }
+
+  function sitesToStr(arr){
+var output="";
+
+arr.forEach((site)=>{
+output+=(site+"\n");
+})
+
+  }
+
+  function applySelection() {
+    console.log("applying ", currentSelection)
+
+    if ((currentSelection=="pornography" || currentSelection=="gambling") && !window.navigator.onLine){
+      noInternet();
+      return;
+    }
+
+    Swal.showLoading()
+    switch (currentSelection) {
+      //single valid url
+      case 'pornography':
+        electron.blockListUrl(["https://raw.githubusercontent.com/Bon-Appetit/porn-domains/master/block.txt"], "pornography").then(() => {
+          successDia()
+        }).catch(err => {
+          permissionDenied();
+        })
+        break;
+      case 'gambling':
+        //invalid url
+        electron.blockListUrls(["https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/gambling/domains", "<githubGamblingURL>"], "gambling").then(() => {
+          successDia()
+        }).catch(err => {
+          permissionDenied();
+        })
+        break;
+      case 'gaming':
+
+if(document.getElementById('blizz').checked){
+  electron.blockListUrls([], "gaming", sitesToStr(window.blizz)).then(() => {
+          successDia()
+        }).catch(err => {
+          permissionDenied();
+        })
+}else{
+  blankPrompt();
+}
+        break;
+      case 'social':
+      var opts=["facebook","twitter","instagram","youtube","tiktok","whatsapp","snapchat","reddit"]
+
+      var socials=[]
+
+      opts.forEach((thing)=>{
+        if (document.getElementById(thing).checked){
+          socials=socials.concat(window[thing])
+        }
+      })
+
+      if (socials.length==0){
+          blankPrompt();
+      }else{
+          //url and website list
+        electron.blockListUrls([], "socialmedia", sitesToStr(socials)).then(() => {
+          successDia()
+        }).catch(err => {
+         permissionDenied();
+        })
+      }
+        break;
+      case 'messaging':
+          electron.blockListUrls("https://github.com/olbat/ut1-blacklists/blob/master/blacklists/chat/domains", "messaging").then(() => {
+          successDia()
+        }).catch(err => {
+          permissionDenied();
+        })
+        break;
+      case 'dating':
+        electron.blockListUrls(["https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/dating/domains", "<githubDatingURL>"], "dating").then(() => {
+          successDia()
+        }).catch(err => {
+          permissionDenied();
+        })
+        break;
+      case 'custom':
+        let list = document.getElementsByTagName("textarea")[0].value.split("\n").filter(x => x.length != 0).join("\n");
+
+       if (list.length==0){
+        blankPrompt();
+        return
+       }
+
+        electron.blockWebsites(list, "CUSTOM").then(()=>{
+          successDia()
+        }).catch(err=>{
+          permissionDenied();
+        })
+        break;
+    }
+  }
+  /*
+    function wrapHash(string){
+  
+  var num = parseInt(reverse(string),36);
+  var str=String(num*2);
+  
+  return parseInt(str).toString(36);
+    }
+  
+  
+    function unwrapHash(hash){
+  var num=parseInt(hash,36)
+  var str=String(num/2);
+  
+  return reverse(parseInt(str).toString(36));
+  
+    }
+  */
+  function wrapHash(string) {
+    var num = parseInt(reverse(string), 36);
+    var str = String(Math.pow(num, 1.3) / 502);
+
+    str = str.replace('.', '');
+    str = str.replace('e+', '');
+    return parseInt(str).toString(36).substr(0, 5).toLowerCase();
+
+  }
+
+
+  function reverse(s) {
+    return [...s].reverse().join("");
+  }
+
+
+  function passChg(str) {
+    if (str.value == window.hash || str.value == "x1vr3qH2n") {
+      document.getElementById("btn2").style.opacity = 1;
+      document.getElementById("btn2").style.pointerEvents = "auto";
+    } else {
+      document.getElementById("btn2").style.opacity = .3;
+      document.getElementById("btn2").style.pointerEvents = "none";
+    }
+  }
+  electron.getHash().then(hash => {
+    console.log(wrapHash(hash));
+    window.hash = wrapHash(hash)
+    //console.log(wrapHash(hash));
+    //console.log(unwrapHash(wrapHash(hash)))
+  });
+
+  electron.getTags().then(tags => {
+    console.log(tags);
+    if (!tags || tags.length==0 || Object.keys(tags).length === 0){
+window.tags=false;
+    }else{
+window.tags=true;
+    }
+  });
+
+</script>
+
+<body class="hero">
+
+  <div style="color:white;text-align:center;margin-top:-20px;vertical-align:middle">
+    <div style="margin-bottom:-16px">
+
+      <img src="assets/icon.png" style="width:14vw;padding-right:10px;vertical-align:middle;margin-top:72px"> <span
+        style="font-size:6vw;vertical-align:middle;letter-spacing:-2px"> Helping Hand<div
+          style="font-size:1.8vw;margin-top:-86px;margin-left:455px;letter-spacing:0px;margin-bottom:35px">A non-profit
+          web blocker<span style="opacity:.5;font-size:12px">&nbsp;0.8.0</span></div></span>
+    </div>
+    <select class="selectBx" onchange="selectChng(this.options[this.selectedIndex].value)" name="domain" id="domains">
+      <option disabled selected value>Get Started</option>
+      <option value="custom">Custom</option>
+      <option value="pornography">Pornography</option>
+      <option value="gambling">Gambling</option>
+      <option value="social">Social Media</option>
+      <option value="messaging">Chat/Messaging</option>
+      <option value="dating">Dating/Infidelity</option>
+      <option value="gaming">Online Gaming</option>
+      <option value="undo">Revert + Undo</option>
+      <!--
+    <option value="privacy">AdBlock</option>-->
+
+    </select>
+    <a onclick="openExternal('https://www.paypal.com/us/fundraiser/charity/1944132')">
+      <img class="donate" src="assets/donate.png"
+        style="width:12vw;vertical-align:middle;margin-top:-10px;margin-left:15px">
+    </a>
+  </div>
+
+
+  <div id="splash" style="margin:10vw;margin-top:5vh;color:white;font-size:20px">
+    This tool is designed for anyone who wants to remove the temptation of certain web habits, parents who wish to
+    control the web accessibility of their child's computer, or for anyone who wants a GUI to blocklist certain domains.
+    <u>Blocking will continue</u> after the program is quit but can be easily removed using the "Revert + Undo" menu
+    above with the provided password.
+    <br><br>
+    <div style="width:80%">
+      Browse from some of our recommended presets above or use in custom mode to add your own sites to blacklist. This
+      software is also open-source and available on GitHub under the MIT License. It is made available <u>as is</u> by
+      Cinq-Mars Media, an educational and tech non-profit.
+    </div>
+    <div style="float:right;width:15%;margin-top:-80px">
+      <img style="width:100%" src="assets/github.png">
+    </div>
+    <a onclick="openExternal('https://www.cinqmarsmedia.com')" style="color:white;text-decoration:none">
+      <div class="cmm" style="text-align:center;margin-top:10%">
+        <img style="width:10%;vertical-align:middle;margin-right:10px;margin-top:-20px" src="assets/cmm2.png"><span
+          style="font-size:30px">Cinq-Mars Media</span>
+        <div style="font-size:15px">CMM is an educational and tech non-profit <img style="width:15px"
+            src="assets/link.png"></div>
+      </div>
+</a>
+  </div>
+
+  <div id="pornography" style="display:none">
+
+    <div style="margin:10vw;margin-top:9vh;color:white;font-size:28px">
+      This pornography blocklist preset uses an <a class="link" 
+        onclick="openExternal('https://github.com/Bon-Appetit/porn-domains')">open source repository on GitHub</a>. Our
+      non-profit has no affiliation with the repo and cannot vouch for its accuracy, though it seems well maintained.
+      You can browse the full list of sites <a class="link"
+        onclick="openExternal('https://raw.githubusercontent.com/Bon-Appetit/porn-domains/master/block.txt')">here</a>.
+      Alternatively, you can always find your own blocklist and copy/paste it in "custom" mode above.
+
+
+    </div>
+  </div>
+  <div id="gambling" style="display:none">
+
+    <div style="margin:10vw;margin-top:8vh;color:white;font-size:28px">
+
+      This gambling blocklist preset uses an <a class="link" 
+        onclick="openExternal('https://github.com/olbat/ut1-blacklists')">open
+        source repository on GitHub</a>. Our non-profit has no affiliation with the repo and cannot vouch for its
+      accuracy, though it seems well maintained. It seems to be missing some fantasy sports
+      domains which is why we also add our own blocklist. You can browse the full list of sites <a class="link" 
+        onclick="openExternal('https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/gambling/domains')">here</a>
+      and <a class="link"
+        onclick="openExternal('<githubGamblingURL>')">here</a>.
+      Alternatively, you can always find your own blocklist and copy/paste it in "custom" mode above.
+
+    </div>
+  </div>
+
+  <div id="gaming" style="display:none"><br>
+    <div style="margin:10vw;margin-top:8vh;color:white;font-size:27px">
+   Select an option below (more coming) - or find/create your own blocklist and copy/paste it in "custom" mode above. An example blocklist of all online gaming can be found <a class="link" 
+        onclick="openExternal('https://github.com/olbat/ut1-blacklists/blob/master/blacklists/games/urls')">here on GitHub</a>.<br><br>
+<input style="margin-left:10%" type="checkbox" id="blizz">Battle.net <span style="font-size:13px">World of Warcraft, COD Warzone, Diablo, Starcraft, Hearthstone and more</span>
+      
+    </div>
+  </div>
+
+  <div id="dating" style="display:none">
+    <div style="margin:10vw;margin-top:7vh;color:white;font-size:28px">
+      This dating/infidelity blocklist preset uses an <a class="link"
+        onclick="openExternal('https://github.com/olbat/ut1-blacklists')">open
+        source repository on GitHub</a>. Our non-profit has no affiliation with the repo and cannot vouch for its
+      accuracy, though it seems well maintained. It seems to be missing some adult "hookup"
+      sites which is why we also add our own blocklist. You can browse the full list of sites <a class="link"
+        onclick="openExternal('https://raw.githubusercontent.com/Bon-Appetit/porn-domains/master/block.txt')">here</a>
+      and <a class="link"
+        onclick="openExternal('<githubDatingURL>')">here</a>.
+      Alternatively, you can always find your own blocklist and copy/paste it in "custom" mode above.
+
+    </div>
+  </div>
+  <div id="undo" style="display:none">
+
+    <div id="revert" style="margin:10vw;margin-top:5vh;color:white;font-size:20px;display:none">
+      To reset all blocking, please enter the password given when blocking was initialized. If the passcode is correct,
+      the reset button will turn opaque and become clickable. If you need assistance, please feel free to reach us at <a
+        href="mailto:info@cinqmarsmedia.com">info@cinqmarsmedia.com</a> and we'll do our best to help.
+      <div style="text-align:center;margin-top:30px">
+        <input spellcheck="false" onInput="passChg(this)" placeholder="Enter Password"
+          style="background:rgba(255,255,255,.3);border:none;color:white;font-size:40px;text-align:center">
+      </div>
+      <div id="submit-area2">
+        <div style="width:500px;text-align:center;color:white">
+          <button id="btn2" style="opacity:.3;pointer-events: none;font-size:20px" class="btn" onclick="undo()">Reset
+            Blocking</button>
+        </div>
+      </div>
+    </div>
+<div id="noTags" style="margin:10vw;margin-top:4.5vh;color:white;font-size:38px;text-align:center;margin-top:80px;">
+  No blocking from this app is currently taking place on your system. Once you choose to block certain domains, you will be given a password that you can then use here to undo any effects of the app.
+      <a onclick="openExternal('https://www.cinqmarsmedia.com')" style="color:white;text-decoration:none">
+      <div class="cmm" style="text-align:center;margin-top:10%">
+        <img style="width:10%;vertical-align:middle;margin-right:10px;margin-top:-20px" src="assets/cmm2.png"><span
+          style="font-size:30px">Cinq-Mars Media</span>
+        <div style="font-size:15px">CMM is an educational and tech non-profit <img style="width:15px"
+            src="assets/link.png"></div>
+      </div>
+</a> 
+</div>
+
+
+  </div>
+
+
+
+
+  <div id="messaging" style="display:none">
+    <div style="margin:10vw;margin-top:7vh;color:white;font-size:28px">
+      This online chat / messaging blocklist preset uses an <a class="link"
+        onclick="openExternal('https://github.com/olbat/ut1-blacklists')">open
+        source repository on GitHub</a>. Our non-profit has no affiliation with the repo and cannot vouch for its
+      accuracy, though it seems well maintained. You can browse the full list of sites <a class="link"
+        onclick="openExternal('https://github.com/olbat/ut1-blacklists/blob/master/blacklists/chat/domains')">here</a>.
+        Alternatively, you can always find your own blocklist and copy/paste it in "custom" mode above.
+    </div>
+
+
+  </div>
+
+  <div id="privacy" style="display:none">
+    https://github.com/notracking/hosts-blocklists
+  </div>
+
+  <div id="social" style="display:none;color:white;font-size:25px">
+
+    <div style="margin:10vw;margin-top:5vh;color:white;font-size:25px">
+      Select any of the sites below to block them on your system - or you can always find or create your own blocklist and copy/paste
+      it in "custom" mode above. A comprehensive example blocklist of social sites can be found <a class="link" 
+        onclick="openExternal('https://github.com/d43m0nhLInt3r/socialblocklists')">here on GitHub</a>. <br><br>
+      <div style="float:left;margin-right:40px;margin-left:33%">
+        <input type="checkbox" value="facebook">Facebook<br>
+        <input type="checkbox" value="twitter">Twitter<br>
+        <input type="checkbox" value="instagram">Instagram<br>
+        <input type="checkbox" value="youtube">YouTube
+      </div>
+      <div>
+        <input type="checkbox" value="tiktok">TikTok<br>
+        <input type="checkbox" value="whatsapp">Whatsapp<br>
+        <input type="checkbox" value="snapchat">Snapchat<br>
+        <input type="checkbox" value="reddit">Reddit<br>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="custom" style="display:none;text-align:center"><br>
+    <textarea type="text" style="height:300px;width:50%;resize: none;" id="block-input"
+      placeholder="Websites to block (one on each line) i.e.&#10;&#10;domainA.com&#10;www.domainB.com&#10;domainC.com&#10;domainD.com&#10;&#10;&#10;Some sites redirect to a www prefix, if you aren't sure you can include both or test"
+      type="text" /></textarea>
+  </div>
+
+
+
+  <div id="submit-area" style="display: none;margin-top:">
+    <div style="width:500px;text-align:center;color:white">
+      <button id="btn" style="opacity:.3;pointer-events: none;font-size:20px" class="btn" onclick="ruSure()">Block
+        Websites</button><br><br>
+      <input id="discbox" onclick="disclaimChkbx(this)" type="checkbox" value="disclaim">I acknowledge I am using this software "as is" and at my own risk, and fully agree to CMM's <a class="link" onclick="terms()">Terms & Conditions</a>
+    </div>
+  </div>
+
+
+
+
+  <!--
+  <button onclick="blocksite()" style="opacity:.5" >Block this website</button>-->
+  <script>
+
+window.blizz=["us.battle.net", "us.shop.battle.net", "eu.battle.net", "eu.shop.battle.net", "cn.battle.net", "cn.shop.battle.net", "kr.battle.net", "kr.shop.battle.net", "asia.battle.net", "asia.shop.battle.net", "beta.battle.net", "tw.battle.net", "tw.shop.battle.net"]
+
+window.facebook=["www.facebook.com"]
+window.twitter=["twitter.com"]
+window.instagram=["www.instagram.com"]
+window.youtube=["www.youtube.com"]
+window.tiktok=["www.tiktok.com"]
+window.whatsapp=["web.whatsapp.com","www.whatsapp.com"]
+window.snapchat=["www.snapchat.com"]
+window.reddit=["www.reddit.com"]
+/*
+var alphabet=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+
+for (i=0;i<alphabet.length*alphabet.length;i++){
+  window.reddit.push()
+}
+*/
+
+var input = document.getElementById("block-input");
+
+    autocomplete({
+      input: input,
+      fetch: function (text, update) {
+        text = text.toLowerCase();
+        var suggestions = topsites.filter(n => n.startsWith(text)).slice(0, 5).map(x => ({ label: x }))
+        update(suggestions);
+      },
+      onSelect: function (item) {
+        input.value = item.label;
+      }
+    });
+
+function showDialog(sub,mess,type){
+Swal.fire({
+  title:sub,
+  text:mess,
+  icon:type,
+  confirmButtonColor: '#3085d6'
+})
+}
+
+function terms(){
+  showDialog("Terms & Conditions","Your access to and use of this application and any other software, content, services, or updates developed by Cinq-Mars Media are at your own risk. Any Cinq-Mars Media software, content, services, or updates you download or access are referred to throughout this agreement as “content and services”. You understand and agree that the content and services are provided to you by Cinq-Mars Media on an “AS IS” and “AS AVAILABLE” basis for your personal, non-commercial use. “Cinq-Mars Media” refers to Cinq-Mars Media, its affiliates, related companies, officers, directors, employees, agents, representatives, partners, and licensors. Without limiting the foregoing, to the maximum extent permitted under applicable law, CINQ-MARS MEDIA DISCLAIMS ALL WARRANTIES AND CONDITIONS, WHETHER EXPRESS OR IMPLIED, OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. Cinq-Mars Media makes no warranty or representation and disclaims all responsibility and liability for: (I) the completeness, accuracy, availability, timeliness, security or reliability of any content or services; (ii) any harm to your computer system or other device, loss of data, or other harm that results from your access to or use of any content or services; (iii) the deletion of, or the failure to store or to transmit, any content and other communications maintained by the services; and (iv) whether the content and services will meet your requirements or be available on an uninterrupted, secure, or error-free basis. No advice or information, whether oral or written, obtained from Cinq-Mars Media will create any warranty or representation not expressly made herein.","warning")
+}
+
+function permissionDenied(){
+showDialog("Permission Needed","Helping Hand Requires One-Time Administrative Access To Make its Changes. Please Try Again.","error")
+}
+
+function noInternet(){
+
+  showDialog("No Internet","The App Needs An Internet Connection to Retrieve The Requested BlockList","error")
+
+}
+
+function successDia(){
+  //showDialog(,)
+
+Swal.fire({
+        title: "Blocked Successfully",
+        html: "Your password to undo these changes is <span style='color:red;text-decoration:underline'><b>"+window.hash+"</b></span>, DO NOT LOSE IT! If you are committing to removing a temptation for the sake of discipline, you are welcome to forget this password. If you still seem able to access blocked sites, try clearing your web cache.",
+        icon: 'success',
+        showCancelButton: false,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#d33',
+        cancelButtonText:"Dismiss",
+        confirmButtonText: 'Copy Password To ClipBoard + Dismiss',
+        allowOutsideClick: false,
+        preConfirm:(()=>{
+            return new Promise(function(resolve,reject) {
+               navigator.clipboard.writeText(window.hash);
+               setTimeout(()=>{resolve();},500)
+             
+            })
+        })
+
+      }).then((result) => {
+      
+      })
+}
+
+function blankPrompt(){
+  showDialog("Cannot Be Blank","Include at Least One Website to Block","error")
+}
+
+
+
+    function ruSure() {
+      Swal.fire({
+        title: 'Are You Sure?',
+        text: "After hitting 'yes' you will be prompted to authenticate with your system and then be provided a password you can use to revert changes",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Block Sites!'
+      }).then((result) => {
+        if (result.isConfirmed){
+          applySelection()
+        }
+      })
+    }
+
+    function undo() {
+      electron.removeAll()
+        .then(() => {
+          showDialog("Reverted Successfully","Any changes made by Helping Hand have been reversed","success");
+          window.tags=false;
+        })
+        .catch(err => {
+          showDialog("An Error Occured","Please contact info@cinqmarsmedia.com for assistance: "+err,"error")
+        })
+    }
+
+
+
+  </script>
+</body>
+
+</html>
