@@ -370,6 +370,7 @@ max-height:300px;
 
 <script>
   let currentSelection = null;
+
   function selectChng(sel) {
     currentSelection = sel;
 
@@ -380,10 +381,15 @@ max-height:300px;
       document.getElementById(nm).style.display = "none";
     })
     document.getElementById(sel).style.display = "block";
+
+if (sel == 'splash') {
+      document.getElementById("submit-area").style.display = "none";
+    }
+
     if (sel == 'undo') {
       document.getElementById("submit-area").style.display = "none";
 
-if (window.tags){
+if (window.tags || window.sitesBlocked){
    document.getElementById("revert").style.display = "block";
    document.getElementById("noTags").style.display = "none";
 }else{
@@ -433,19 +439,19 @@ document.getElementById("noTags").style.display = "block";
     window.open(url, "_blank", "frame=true,nodeIntegration=no")
   }
 
-  function sitesToStr(arr){
+function sitesToStr(arr){
 var output="";
 
 arr.forEach((site)=>{
 output+=(site+"\n");
 })
-
+return output
   }
 
   function applySelection() {
     console.log("applying ", currentSelection)
 
-    if ((currentSelection=="pornography" || currentSelection=="gambling") && !window.navigator.onLine){
+    if (currentSelection!=="custom" && !window.navigator.onLine){
       noInternet();
       return;
     }
@@ -454,7 +460,7 @@ output+=(site+"\n");
     switch (currentSelection) {
       //single valid url
       case 'pornography':
-        electron.blockListUrl(["https://raw.githubusercontent.com/Bon-Appetit/porn-domains/master/block.txt"], "pornography").then(() => {
+        electron.blockListUrl("https://raw.githubusercontent.com/Bon-Appetit/porn-domains/master/block.txt", "pornography").then(() => {
           successDia()
         }).catch(err => {
           permissionDenied();
@@ -462,7 +468,7 @@ output+=(site+"\n");
         break;
       case 'gambling':
         //invalid url
-        electron.blockListUrls(["https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/gambling/domains", "<githubGamblingURL>"], "gambling").then(() => {
+        electron.blockListUrls(["https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/gambling/domains", "https://raw.githubusercontent.com/cinqmarsmedia/Helping-Hand-Website-Blocker/main/blocklists/gamblingDomains.txt"], "gambling").then(() => {
           successDia()
         }).catch(err => {
           permissionDenied();
@@ -471,7 +477,7 @@ output+=(site+"\n");
       case 'gaming':
 
 if(document.getElementById('blizz').checked){
-  electron.blockListUrls([], "gaming", sitesToStr(window.blizz)).then(() => {
+  electron.blockWebsites(sitesToStr(window.blizz), "gaming").then(() => {
           successDia()
         }).catch(err => {
           permissionDenied();
@@ -494,8 +500,8 @@ if(document.getElementById('blizz').checked){
       if (socials.length==0){
           blankPrompt();
       }else{
-          //url and website list
-        electron.blockListUrls([], "socialmedia", sitesToStr(socials)).then(() => {
+
+          electron.blockWebsites(sitesToStr(socials), "socialmedia").then(()=>{
           successDia()
         }).catch(err => {
          permissionDenied();
@@ -503,14 +509,14 @@ if(document.getElementById('blizz').checked){
       }
         break;
       case 'messaging':
-          electron.blockListUrls("https://github.com/olbat/ut1-blacklists/blob/master/blacklists/chat/domains", "messaging").then(() => {
+          electron.blockListUrls(["https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/chat/domains"], "messaging").then(() => {
           successDia()
         }).catch(err => {
           permissionDenied();
         })
         break;
       case 'dating':
-        electron.blockListUrls(["https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/dating/domains", "<githubDatingURL>"], "dating").then(() => {
+        electron.blockListUrls(["https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/dating/domains", "https://raw.githubusercontent.com/cinqmarsmedia/Helping-Hand-Website-Blocker/main/blocklists/escortInfidelityDomains.txt"], "dating").then(() => {
           successDia()
         }).catch(err => {
           permissionDenied();
@@ -601,10 +607,10 @@ window.tags=true;
       <img src="assets/icon.png" style="width:14vw;padding-right:10px;vertical-align:middle;margin-top:72px"> <span
         style="font-size:6vw;vertical-align:middle;letter-spacing:-2px"> Helping Hand<div
           style="font-size:1.8vw;margin-top:-86px;margin-left:455px;letter-spacing:0px;margin-bottom:35px">A non-profit
-          web blocker<span style="opacity:.5;font-size:12px">&nbsp;0.8.0</span></div></span>
+          web blocker<span style="opacity:.5;font-size:12px">&nbsp;1.0.0</span></div></span>
     </div>
     <select class="selectBx" onchange="selectChng(this.options[this.selectedIndex].value)" name="domain" id="domains">
-      <option disabled selected value>Get Started</option>
+      <option disabled selected value="splash">Get Started</option>
       <option value="custom">Custom</option>
       <option value="pornography">Pornography</option>
       <option value="gambling">Gambling</option>
@@ -635,7 +641,7 @@ window.tags=true;
       software is also open-source and available on GitHub under the MIT License. It is made available <u>as is</u> by
       Cinq-Mars Media, an educational and tech non-profit.
     </div>
-    <div style="float:right;width:15%;margin-top:-80px">
+    <div onclick="openExternal('https://github.com/cinqmarsmedia/Helping-Hand-Website-Blocker')" style="float:right;width:15%;margin-top:-80px">
       <img style="width:100%" src="assets/github.png">
     </div>
     <a onclick="openExternal('https://www.cinqmarsmedia.com')" style="color:white;text-decoration:none">
@@ -672,7 +678,7 @@ window.tags=true;
       domains which is why we also add our own blocklist. You can browse the full list of sites <a class="link" 
         onclick="openExternal('https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/gambling/domains')">here</a>
       and <a class="link"
-        onclick="openExternal('<githubGamblingURL>')">here</a>.
+        onclick="openExternal('https://github.com/cinqmarsmedia/Helping-Hand-Website-Blocker/blob/main/blocklists/gamblingDomains.txt')">here</a>.
       Alternatively, you can always find your own blocklist and copy/paste it in "custom" mode above.
 
     </div>
@@ -694,9 +700,9 @@ window.tags=true;
         source repository on GitHub</a>. Our non-profit has no affiliation with the repo and cannot vouch for its
       accuracy, though it seems well maintained. It seems to be missing some adult "hookup"
       sites which is why we also add our own blocklist. You can browse the full list of sites <a class="link"
-        onclick="openExternal('https://raw.githubusercontent.com/Bon-Appetit/porn-domains/master/block.txt')">here</a>
+        onclick="openExternal('https://github.com/olbat/ut1-blacklists/blob/master/blacklists/dating/domains')">here</a>
       and <a class="link"
-        onclick="openExternal('<githubDatingURL>')">here</a>.
+        onclick="openExternal('https://github.com/cinqmarsmedia/Helping-Hand-Website-Blocker/blob/main/blocklists/escortInfidelityDomains.txt')">here</a>.
       Alternatively, you can always find your own blocklist and copy/paste it in "custom" mode above.
 
     </div>
@@ -708,7 +714,7 @@ window.tags=true;
       the reset button will turn opaque and become clickable. If you need assistance, please feel free to reach us at <a
         href="mailto:info@cinqmarsmedia.com">info@cinqmarsmedia.com</a> and we'll do our best to help.
       <div style="text-align:center;margin-top:30px">
-        <input spellcheck="false" onInput="passChg(this)" placeholder="Enter Password"
+        <input spellcheck="false" onInput="passChg(this)" id="passField" placeholder="Enter Password"
           style="background:rgba(255,255,255,.3);border:none;color:white;font-size:40px;text-align:center">
       </div>
       <div id="submit-area2">
@@ -760,16 +766,16 @@ window.tags=true;
       it in "custom" mode above. A comprehensive example blocklist of social sites can be found <a class="link" 
         onclick="openExternal('https://github.com/d43m0nhLInt3r/socialblocklists')">here on GitHub</a>. <br><br>
       <div style="float:left;margin-right:40px;margin-left:33%">
-        <input type="checkbox" value="facebook">Facebook<br>
-        <input type="checkbox" value="twitter">Twitter<br>
-        <input type="checkbox" value="instagram">Instagram<br>
-        <input type="checkbox" value="youtube">YouTube
+        <input type="checkbox" value="facebook" id="facebook">Facebook<br>
+        <input type="checkbox" value="twitter" id="twitter">Twitter<br>
+        <input type="checkbox" value="instagram" id="instagram">Instagram<br>
+        <input type="checkbox" value="youtube" id="youtube">YouTube
       </div>
       <div>
-        <input type="checkbox" value="tiktok">TikTok<br>
-        <input type="checkbox" value="whatsapp">Whatsapp<br>
-        <input type="checkbox" value="snapchat">Snapchat<br>
-        <input type="checkbox" value="reddit">Reddit<br>
+        <input type="checkbox" value="tiktok" id="tiktok">TikTok<br>
+        <input type="checkbox" value="whatsapp" id="whatsapp">Whatsapp<br>
+        <input type="checkbox" value="snapchat" id="snapchat">Snapchat<br>
+        <input type="checkbox" value="reddit" id="reddit">Reddit<br>
       </div>
     </div>
   </div>
@@ -809,6 +815,8 @@ window.tiktok=["www.tiktok.com"]
 window.whatsapp=["web.whatsapp.com","www.whatsapp.com"]
 window.snapchat=["www.snapchat.com"]
 window.reddit=["www.reddit.com"]
+
+window.sitesBlocked=false
 /*
 var alphabet=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
@@ -870,10 +878,13 @@ Swal.fire({
         preConfirm:(()=>{
             return new Promise(function(resolve,reject) {
                navigator.clipboard.writeText(window.hash);
+
+window.sitesBlocked=true;
                setTimeout(()=>{resolve();},500)
              
             })
         })
+
 
       }).then((result) => {
       
@@ -907,6 +918,11 @@ function blankPrompt(){
         .then(() => {
           showDialog("Reverted Successfully","Any changes made by Helping Hand have been reversed","success");
           window.tags=false;
+          window.sitesBlocked=false;
+          selectChng("splash")
+          document.getElementById("domains").value = "splash";
+          document.getElementById("passField").value = "";
+
         })
         .catch(err => {
           showDialog("An Error Occured","Please contact info@cinqmarsmedia.com for assistance: "+err,"error")

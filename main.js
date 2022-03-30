@@ -245,10 +245,12 @@ function createWindow() {
   ipcMain.on("BLOCK_LIST_URLS", async (event, urls, tag, id, sitesText = "") => {
     let h = http;
     let promises = [];
+
     urls.forEach((url, i) => {
       if (url.substring(0, 5) == "https") {
         h = https;
       }
+      
       promises.push(new Promise((resolve, reject) => {
         h.get(url, async res => {
           const { statusCode } = res;
